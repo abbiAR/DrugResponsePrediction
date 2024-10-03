@@ -44,7 +44,7 @@ def drug_selection(dft, cor_n):
         if d not in out:
             approved.append(d)
             line=corr[d]
-            line=line.loc[line>cor_n] # correlation coefficient cutoff, drugs that are more than 0p2 pearson are thrown away
+            line=line.loc[line>cor_n] #remove drugs above specified correlation coefficient cutoff
             out=out+list(line.index)   
         
     return(approved)
@@ -55,12 +55,12 @@ def predict(df1, df2):
     runseed1=random.randint(0,100000)#22938#85529#75027#9502#312351
     
     # SELECT A SUBSET OF UNKNOWN PATIENTS RANDOMLY
-    test_patients = list(df1.T.sample(frac=0.2, random_state = 82634).index) #this seed guarantees that the patients have not been involved in TML matrix generation
+    test_patients = list(df1.T.sample(frac=0.2, random_state = 82634).index) #this seed guarantees that the patients have not been involved in TML matrix generation, preventing information leakage
     train_patients = list(df1.T.drop(test_patients).index)
 
     dft=df1.T.drop(test_patients)
 
-    #split test set into test and validation (20% to 10% each)
+    #split test set into test and validation (from 20% of dataset to 10% each)
     half=int(len(test_patients)/2)
     validation_patients = random.Random(7754).sample(test_patients, half)
     test_patients = list(set(test_patients)-set(validation_patients))
