@@ -4,6 +4,18 @@ Code related to the study: "Personalised Medicine: Establishing predictive machi
 
 This repository contains code for executing response predictions and the files necessitated.
 
-Input to script
-1) target values (log10(IC50)) from the GDSC1 dataset.
-2) TML completed log10(IC50) matrix for use as training data.
+The four datasets are separated into folders with code and associated data.
+
+GDSC1 and GDSC2 files:
+1. script
+2. dataset with transformed IC50 values (-1*log10(IC50)).
+3. TML completed matrix for use as training data.
+
+PRISM files:
+1. script
+2. dataset with transformed fold-change values (-1*log2(fold-change))
+3. TML completed matrix for use as training data
+
+RX files:
+1. script
+2. dataset with viability values (normalised against DMSO)
